@@ -3,6 +3,7 @@
 namespace ajyshrma69\ZohoConnector;
 
 use Exception;
+use zsign\ZohoException;
 
 class ZohoClient extends Config
 {
@@ -63,7 +64,7 @@ class ZohoClient extends Config
                 return $this;
             }
         } catch (Exception $e) {
-            throw new Exception('Invalid Code Provide . Please refresh token');
+            throw new ZohoException($e->getMessage(), 400);
         }
     }
 }

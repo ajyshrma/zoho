@@ -2,6 +2,7 @@
 
 namespace ajyshrma69\ZohoConnector;
 
+use Exception;
 
 class Config
 {
@@ -19,6 +20,10 @@ class Config
 
     public function __construct(array $data)
     {
+        if (!isset($data['client_id']) || empty($data['client_id'])) {
+            throw new ZohoException("Please pass your client id to generate zoho code", 404);
+        }
+
         foreach ($data as $key => $value) {
             if (isset($this->{$key})) {
                 $this->{$key} = $value;
