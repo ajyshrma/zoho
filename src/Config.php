@@ -21,7 +21,7 @@ class Config
     public function __construct(array $data)
     {
         if (!isset($data['client_id']) || empty($data['client_id'])) {
-            throw new ZohoException("Please pass your client id to generate zoho code", 404);
+            throw new ZohoException(ZohoException::ZOHO_CLIENT_ID_NOT_FOUND, 404);
         }
 
         foreach ($data as $key => $value) {
