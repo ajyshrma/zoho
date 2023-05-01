@@ -1,6 +1,8 @@
 <?php
 
-namespace ZohoConnector;
+namespace ajyshrma69\ZohoConnector;
+
+use Exception;
 
 class ZohoClient extends Config
 {
@@ -29,7 +31,7 @@ class ZohoClient extends Config
     /**
      * Generate Path To Create Zoho Code
      */
-    public function zohoCodeGeneratorPath()
+    public function zohoCodeGenerateUrl()
     {
         $url = $this->getApiUrl() . "auth?scope=$this->scopes&client_id=$this->client_id&state=testing&response_type=code&redirect_uri=$this->redirect_url&access_type=offline&prompt=consent";
 
@@ -67,27 +69,5 @@ class ZohoClient extends Config
         }
 
         throw new Exception('Invalid Code Provide . Please refresh token');
-    }
-
-
-    public function setAccessToken($token)
-    {
-        return $this->access_token = $token;
-    }
-
-    public function getAccessToken()
-    {
-        return $this->access_token;
-    }
-
-
-    public function setRefreshToken($token)
-    {
-        return $this->refresh_token = $token;
-    }
-
-    public function getRefreshToken()
-    {
-        return $this->refresh_token;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use Ajyshrma\Zoho\ZohoClient;
+use ajyshrma69\ZohoConnector\ZohoClient;
 
 $client = new ZohoClient([
     'client_id' => '1000.LCWESW44DPIG7OQDECHH6Y1YFDCF9A',
