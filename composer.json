@@ -1,0 +1,18 @@
+{
+  "name": "ajyshrma69/zoho-connector",
+  "description": "Zoho Access Token and Refresh Token Generator",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "ajyshrma69\\ZohoConnector\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "ajyshrma",
+      "email": "ajyshrma69@gmail.com"
+    }
+  ],
+  "require": {}
+}
