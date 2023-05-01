@@ -17,16 +17,21 @@ class Config
     public $code = '';
 
 
-    public function __construct()
+    public function __construct(array $data)
     {
+        foreach ($data as $key => $value) {
+            if (isset($this->{$key})) {
+                $this->{$key} = $value;
+            }
+        }
     }
 
     public function getApiUrl()
     {
-        return $this->baseUrl . DIRECTORY_SEPARATOR . $this->apiVerson . DIRECTORY_SEPARATOR;
+        return $this->baseUrl . "/" . $this->apiVerson . "/";
     }
 
-    public function setCode($code)
+    public function setZohoCode($code)
     {
         return $this->code = $code;
     }

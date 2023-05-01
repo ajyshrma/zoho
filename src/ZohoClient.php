@@ -9,13 +9,7 @@ class ZohoClient extends Config
 
     public function __construct(array $data)
     {
-        foreach ($data as $key => $value) {
-            if (isset($this->{$key})) {
-                $this->{$key} = $value;
-            }
-        }
-        //// Calling Parent::constructor
-        parent::__construct();
+        parent::__construct($data);
     }
 
     /**
@@ -45,29 +39,30 @@ class ZohoClient extends Config
      */
     public function generateAccessToken()
     {
-        $url = $this->getApiUrl() . "token?code=$this->code&client_id=" . $this->client_id . "&client_secret=" . $this->client_secret . "&redirect_uri=" . $this->redirect_url . "&grant_type=authorization_code";
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-        ));
-        $response   = curl_exec($curl);
-        curl_close($curl);
-        $response = json_decode($response);
+        try {
+            $url = $this->getApiUrl() . "token?code=$this->code&client_id=" . $this->client_id . "&client_secret=" . $this->client_secret . "&redirect_uri=" . $this->redirect_url . "&grant_type=authorization_code";
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+            ));
+            $response   = curl_exec($curl);
+            curl_close($curl);
+            $response = json_decode($response);
 
-        if (!property_exists($response, 'error')) {
-            if (property_exists($response, 'access_token')) {
-                $this->setAccessToken($response->access_token);
+            if (!property_exists($response, 'error')) {
+                if (property_exists($response, 'access_token')) {
+                    $this->setAccessToken($response->access_token);
+                }
+                if (property_exists($response, 'refresh_token')) {
+                    $this->setRefreshToken($response->refresh_token);
+                }
+                return $this;
             }
-            if (property_exists($response, 'refresh_token')) {
-                $this->setRefreshToken($response->refresh_token);
-            }
-            return $this;
+        } catch (Exception $e) {
+            throw new Exception('Invalid Code Provide . Please refresh token');
         }
-
-        throw new Exception('Invalid Code Provide . Please refresh token');
     }
 }
