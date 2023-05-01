@@ -35,7 +35,7 @@ class ZohoClient extends Config
     {
         $url = $this->getApiUrl() . "auth?scope=$this->scopes&client_id=$this->client_id&state=testing&response_type=code&redirect_uri=$this->redirect_url&access_type=offline&prompt=consent";
 
-        return $url;
+        return "<a href='$url' target='_blank'>Click To Get Code </a>";
     }
 
     /**
