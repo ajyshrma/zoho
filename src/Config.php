@@ -7,7 +7,7 @@ class Config
 {
 
     public $baseUrl = "https://accounts.zoho.com/oauth";
-    public $apiVerson = "v2";
+    public $apiVersion = "v2";
     public $client_id = "";
     public $client_secret = "";
     public $redirect_url = "";
@@ -28,12 +28,27 @@ class Config
 
     public function getApiUrl()
     {
-        return $this->baseUrl . "/" . $this->apiVerson . "/";
+        return $this->baseUrl . "/" . $this->getApiVersion() . "/";
+    }
+
+    public function setApiVersion($version = 'v2')
+    {
+        return $this->apiVersion = $version;
+    }
+
+    public function getApiVersion()
+    {
+        return $this->apiVersion;
     }
 
     public function setZohoCode($code)
     {
         return $this->code = $code;
+    }
+
+    public function getZohoCode()
+    {
+        return $this->code;
     }
 
     public function setAccessToken($token)
@@ -54,5 +69,15 @@ class Config
     public function getRefreshToken()
     {
         return $this->refresh_token;
+    }
+
+    public function setScopes(string $scopes)
+    {
+        return $this->scopes = $scopes;
+    }
+
+    public function getScopes()
+    {
+        return $this->scopes;
     }
 }
