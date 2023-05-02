@@ -2,8 +2,6 @@
 
 namespace ajyshrma69\ZohoConnector;
 
-use Exception;
-
 class Config
 {
 
