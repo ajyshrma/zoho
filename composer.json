@@ -14,5 +14,7 @@
       "email": "ajyshrma69@gmail.com"
     }
   ],
-  "require": {}
+  "require": {
+    "php": ">=5.6"
+  }
 }
