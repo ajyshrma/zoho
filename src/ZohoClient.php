@@ -52,7 +52,6 @@ class ZohoClient extends Config
             curl_close($curl);
             $response = json_decode($response);
 
-            return $response;
             if (!property_exists($response, 'error')) {
                 if (property_exists($response, 'access_token')) {
                     $this->setAccessToken($response->access_token);
