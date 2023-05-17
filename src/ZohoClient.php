@@ -83,7 +83,6 @@ class ZohoClient extends Config
             curl_close($curl);
             $response = json_decode($response);
 
-            return $response;
             if (!property_exists($response, 'error')) {
                 if (property_exists($response, 'access_token')) {
                     $this->setAccessToken($response->access_token);
@@ -93,6 +92,7 @@ class ZohoClient extends Config
                 }
                 return $this;
             }
+            return $response;
         } catch (Exception $e) {
             throw new ZohoException($e->getMessage(), 400);
         }
