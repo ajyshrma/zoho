@@ -22,8 +22,7 @@ class ZohoRequest
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-            $headers = array();
-            $headers[] = "Authorization: Zoho-oauthtoken " . $this->zohoClient->access_token;
+
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             $result = curl_exec($ch);
             curl_close($ch);
@@ -31,5 +30,14 @@ class ZohoRequest
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
+    }
+
+
+    public function getRequestHeaders()
+    {
+        $headers = array();
+        $headers[] = "Authorization: Zoho-oauthtoken " . $this->zohoClient->access_token;
+
+        return $headers;
     }
 }
